@@ -4,7 +4,7 @@ import utility.observer.NamedPropertyChangeSubject;
 
 public interface TemperatureModel extends NamedPropertyChangeSubject
 {
-  void addTemperature(String id, double temperature);
+  void addTemperature(String id,double externalTemperature, double temperature);
 
   Temperature getLastInsertedTemperature();
 

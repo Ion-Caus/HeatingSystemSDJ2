@@ -2,8 +2,12 @@ package external;
 
 public class HeaterHighPower extends HeaterState
 {
-
   private Thread wait;
+
+  public HeaterHighPower(Heater heater){
+    timeout(heater);
+  }
+
   @Override public void powerDown(Heater heater)
   {
     wait.interrupt();

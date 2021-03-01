@@ -14,20 +14,13 @@ public class TemperatureModelManager implements TemperatureModel
     this.property = new PropertyChangeSupport(this);
   }
 
-  @Override public synchronized void addTemperature(String id, double value)
+  @Override public synchronized void addTemperature(String id,double externalTemperature, double internalTemperature)
   {
-    Temperature temperature = new Temperature(id, value);
-    Temperature old = getLastInsertedTemperature(id);
-    this.temperatureList.addTemperature(temperature);
-//    if (old != null && old.getValue() != temperature.getValue())
-//    {
-//      System.out.println("--> new=" + temperature + " (old=" + old + ")");
-//    }
-//    else if (old == null)
-//    {
-//      System.out.println("--> new=" + temperature + " (old=" + old + ")");
-//    }
-    property.firePropertyChange(id,null,temperature);
+    var inside = new Temperature(id, internalTemperature);
+    var outside = new Temperature("outside",externalTemperature);
+    this.temperatureList.addTemperature(inside);
+    property.firePropertyChange("outside",null,outside);
+    property.firePropertyChange(id,null,inside);
   }
 
   @Override public synchronized Temperature getLastInsertedTemperature()

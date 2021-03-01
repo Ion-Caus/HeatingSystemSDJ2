@@ -35,6 +35,8 @@ public class MyApplication extends Application
     heater.powerUp();
 
     heater.powerUp();
+
+    heater.powerUp();
   }
   @Override
   public void stop(){

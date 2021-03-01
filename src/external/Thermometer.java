@@ -24,7 +24,7 @@ public class Thermometer implements Runnable, PropertyChangeListener
     this.t = t;
     this.d = d;
     this.p = 0;     // heaters power {0, 1, 2 or 3}
-    this.t0 = 0.0;  // outdoor temperature
+    this.t0 = 0.0;  // starting outdoor temperature
     this.model = model;
     this.heater = heater;
     heater.addListener("state",this);
@@ -40,10 +40,10 @@ public class Thermometer implements Runnable, PropertyChangeListener
       {
         int seconds = (int) (Math.random() * 4 + 4);
         Thread.sleep(seconds * 1000);
+        t0 = externalTemperature(t0,-20,20);
         t = temperature(t, p, d, t0, seconds);
         System.out.printf(id + " %.1f\n", t);
-        //addTemperature when a new temperature has been calculated!
-        model.addTemperature(id, t);
+        model.addTemperature(id,t0,t);
       }
       catch (InterruptedException e)
       {
@@ -110,6 +110,7 @@ public class Thermometer implements Runnable, PropertyChangeListener
     double right = max - t0;
     int sign = Math.random() * (left + right) > left ? 1 : -1;
     t0 += sign * Math.random();
+    System.out.printf("External temperature: %s \n",t0);
     return t0;
   }
 
