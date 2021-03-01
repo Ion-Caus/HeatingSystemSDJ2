@@ -1,6 +1,6 @@
 package external;
 
-
+import model.TemperatureModel;
 
 public class Thermometer implements Runnable
 {

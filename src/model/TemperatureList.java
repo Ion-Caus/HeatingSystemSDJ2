@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 public class TemperatureList
 {
-   private ArrayList<temperature.model.Temperature> list;
+   private ArrayList<Temperature> list;
 
    public TemperatureList()
    {
       this.list = new ArrayList<>();
    }
 
-   public void addTemperature(temperature.model.Temperature temperature)
+   public void addTemperature(Temperature temperature)
    {
       list.add(temperature);
    }
 
-   public temperature.model.Temperature getTemperature(int index)
+   public Temperature getTemperature(int index)
    {
       if (index >= 0 && index < list.size())
       {
@@ -25,7 +25,7 @@ public class TemperatureList
       return null;
    }
 
-   public temperature.model.Temperature getLastTemperature(String id)
+   public Temperature getLastTemperature(String id)
    {
       if (list.size() < 1)
       {
