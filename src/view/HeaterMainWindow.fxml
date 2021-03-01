@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox prefHeight="447.0" prefWidth="734.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" prefHeight="57.0" prefWidth="734.0" text="Heater">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="110.0" prefWidth="734.0" spacing="80.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="110.0" prefWidth="160.0">
+               <children>
+                  <Label text="IndoorT1(heater)">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField prefWidth="100.0" style="-fx-background-radius: 25;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="328.0" layoutY="10.0" prefHeight="110.0" prefWidth="160.0">
+               <children>
+                  <Label text="IndoorT2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField prefWidth="100.0" style="-fx-background-radius: 25;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="383.0" layoutY="10.0" prefHeight="110.0" prefWidth="160.0">
+               <children>
+                  <Label text="OutdoorT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField prefWidth="100.0" style="-fx-background-radius: 25;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="MinimumT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField style="-fx-background-radius: 25;">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="MaximumT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField style="-fx-background-radius: 25;">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+         <children>
+            <Label text="Power position">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Label">
+               <HBox.margin>
+                  <Insets right="90.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-radius: 25;" text="Turn Up">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="270.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-radius: 25;" text="Turn Down">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" style="-fx-background-radius: 25;" text="Details">
+         <VBox.margin>
+            <Insets left="500.0" />
+         </VBox.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Label text="Error" textFill="#ed0303">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="40.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>
