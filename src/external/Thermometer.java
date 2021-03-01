@@ -2,7 +2,10 @@ package external;
 
 import model.TemperatureModel;
 
-public class Thermometer implements Runnable
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class Thermometer implements Runnable, PropertyChangeListener
 {
   private double t;
   private double t0;
@@ -12,15 +15,19 @@ public class Thermometer implements Runnable
   private boolean running;
   private Thread runningThread;
   private TemperatureModel model;
+  private Heater heater;
 
-  public Thermometer(String id, double t, int d, TemperatureModel model)
+
+  public Thermometer(String id, double t, int d, TemperatureModel model, Heater heater)
   {
     this.id = id;
     this.t = t;
     this.d = d;
-    this.p = 2;     // heaters power {0, 1, 2 or 3}
+    this.p = 0;     // heaters power {0, 1, 2 or 3}
     this.t0 = 0.0;  // outdoor temperature
     this.model = model;
+    this.heater = heater;
+    heater.addListener("state",this);
   }
 
   @Override public void run()
@@ -104,5 +111,23 @@ public class Thermometer implements Runnable
     int sign = Math.random() * (left + right) > left ? 1 : -1;
     t0 += sign * Math.random();
     return t0;
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    switch ((String)evt.getNewValue()){
+      case "HeaterOff":
+        this.p = 0;
+        break;
+      case "HeaterLowPower":
+        this.p = 1;
+        break;
+      case "HeaterMidPower":
+        this.p = 2;
+        break;
+      case "HeaterHighPower":
+        this.p = 3;
+        break;
+    }
   }
 }
