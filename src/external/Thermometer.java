@@ -13,14 +13,14 @@ public class Thermometer implements Runnable
   private Thread runningThread;
   private TemperatureModel model;
 
-  public Thermometer(TemperatureModel model, String id, double t, int d)
+  public Thermometer(String id, double t, int d, TemperatureModel model)
   {
-    this.model = model;
     this.id = id;
     this.t = t;
     this.d = d;
     this.p = 2;     // heaters power {0, 1, 2 or 3}
     this.t0 = 0.0;  // outdoor temperature
+    this.model = model;
   }
 
   @Override public void run()
