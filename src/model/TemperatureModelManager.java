@@ -26,7 +26,7 @@ public class TemperatureModelManager implements TemperatureModel
   }
 
   @Override
-  public void fireStateProperty(int state) {
+  public void fireHeaterStateProperty(int state) {
     property.firePropertyChange("stateChange", null, state);
   }
 

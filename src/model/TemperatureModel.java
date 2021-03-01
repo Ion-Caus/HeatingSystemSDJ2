@@ -6,7 +6,7 @@ public interface TemperatureModel extends NamedPropertyChangeSubject
 {
   void addTemperature(String id,double externalTemperature, double temperature);
 
-  void fireStateProperty(int state);
+  void fireHeaterStateProperty(int state);
 
   Temperature getLastInsertedTemperature();
 
