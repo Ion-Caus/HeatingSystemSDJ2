@@ -21,6 +21,13 @@ public class TemperatureModelManager implements TemperatureModel
     this.temperatureList.addTemperature(inside);
     property.firePropertyChange("outside",null,outside);
     property.firePropertyChange(id,null,inside);
+
+
+  }
+
+  @Override
+  public void fireStateProperty(int state) {
+    property.firePropertyChange("stateChange", null, state);
   }
 
   @Override public synchronized Temperature getLastInsertedTemperature()
