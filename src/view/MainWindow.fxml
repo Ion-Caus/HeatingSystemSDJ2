@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="447.0" prefWidth="734.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+<VBox prefHeight="447.0" prefWidth="734.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <children>
       <Label alignment="CENTER" prefHeight="57.0" prefWidth="734.0" text="Heater">
          <font>
@@ -100,9 +100,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="heaterPowerStateLabel" text="Label">
+            <Label fx:id="heaterPowerStateLabel" prefHeight="27.0" prefWidth="168.0" text="Label">
                <HBox.margin>
-                  <Insets right="90.0" />
+                  <Insets />
                </HBox.margin>
                <font>
                   <Font size="18.0" />
