@@ -1,5 +1,6 @@
 package model;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -14,6 +15,7 @@ public class TemperatureModelManager implements TemperatureModel
     temperatureList = new TemperatureList();
     this.property = new PropertyChangeSupport(this);
     this.heater = new Heater();
+    heater.addListener("state",this);
   }
 
   @Override public synchronized void addTemperature(String id,double externalTemperature, double internalTemperature)
@@ -41,13 +43,11 @@ public class TemperatureModelManager implements TemperatureModel
   @Override public void powerUp()
   {
     heater.powerUp();
-    property.firePropertyChange("state",null,heater.getState());
   }
 
   @Override public void powerDown()
   {
     heater.powerDown();
-    property.firePropertyChange("state",null,heater.getState());
   }
 
   @Override public Heater getHeater()
@@ -73,7 +73,10 @@ public class TemperatureModelManager implements TemperatureModel
     }else property.removePropertyChangeListener(propertyName,listener);
   }
 
-
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    property.firePropertyChange("state",null,evt.getNewValue());
+  }
 
   // and maybe other methods...
 }

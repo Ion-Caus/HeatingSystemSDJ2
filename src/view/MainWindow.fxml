@@ -108,12 +108,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#powerUpPressed" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 25;" text="Power Up">
+            <Button fx:id="powerUpButton" mnemonicParsing="false" onAction="#powerUpPressed" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 25;" text="Power Up">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="270.0" layoutY="10.0" mnemonicParsing="false" onAction="#powerDownPressed" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 25;" text="Power Down">
+            <Button fx:id="powerDownButton" layoutX="270.0" layoutY="10.0" mnemonicParsing="false" onAction="#powerDownPressed" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 25;" text="Power Down">
                <font>
                   <Font size="16.0" />
                </font>

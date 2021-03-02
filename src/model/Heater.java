@@ -29,6 +29,7 @@ public class Heater implements NamedPropertyChangeSubject
   public void setState(HeaterState state)
   {
     this.heaterState = state;
+    property.firePropertyChange("state",null,getState());
   }
 
   public String getState()

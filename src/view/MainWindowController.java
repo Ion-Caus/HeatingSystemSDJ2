@@ -2,6 +2,7 @@ package view;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -11,13 +12,15 @@ import viewmodel.MainWindowViewModel;
 public class MainWindowController
 {
 
-  @FXML public TextField closestField;
-  @FXML public TextField furthestField;
-  @FXML public TextField outDoorField;
-  @FXML public TextField minTempField;
-  @FXML public TextField maxTempField;
-  @FXML public Label heaterPowerStateLabel;
-  @FXML public Label errorLabel;
+  @FXML private TextField closestField;
+  @FXML private TextField furthestField;
+  @FXML private TextField outDoorField;
+  @FXML private TextField minTempField;
+  @FXML private TextField maxTempField;
+  @FXML private Label heaterPowerStateLabel;
+  @FXML private Label errorLabel;
+  @FXML private Button powerUpButton;
+  @FXML private Button powerDownButton;
   private Region root;
   private ViewHandler viewHandler;
   private MainWindowViewModel mainWindowViewModel;
@@ -58,6 +61,12 @@ public class MainWindowController
     heaterPowerStateLabel.textProperty().bind(mainWindowViewModel.getHeaterStateProperty());
     errorLabel.textProperty().bind(mainWindowViewModel.getWarningProperty());
 
+    powerDownButton.disableProperty().bindBidirectional(mainWindowViewModel.getTurnedOff());
+    powerUpButton.disableProperty().bindBidirectional(mainWindowViewModel.getMaxedOut());
+
+
+
+    reset();
   }
 
   public void reset()

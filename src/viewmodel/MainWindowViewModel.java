@@ -11,36 +11,41 @@ import java.beans.PropertyChangeListener;
 public class MainWindowViewModel implements PropertyChangeListener
 {
   private StringProperty heaterState, warningProperty;
+  private BooleanProperty turnedOff, maxedOut;
   private DoubleProperty temperatureInsideClosest, temperatureInsideFurthest, temperatureOutside, minTemperature, maxTemperature;
   private TemperatureModel model;
 
   public MainWindowViewModel(TemperatureModel model)
   {
     this.model = model;
-    temperatureInsideClosest = new SimpleDoubleProperty(
-        model.getLastInsertedTemperature("closest").getValue());
-    temperatureInsideFurthest = new SimpleDoubleProperty(
-        model.getLastInsertedTemperature("furthest").getValue());
-    temperatureOutside = new SimpleDoubleProperty(
-        model.getLastInsertedTemperature("outside").getValue());
-    minTemperature = new SimpleDoubleProperty();
-    maxTemperature = new SimpleDoubleProperty();
+    temperatureInsideClosest = new SimpleDoubleProperty();
+    temperatureInsideFurthest = new SimpleDoubleProperty();
+    temperatureOutside = new SimpleDoubleProperty();
+    minTemperature = new SimpleDoubleProperty(-20);
+    maxTemperature = new SimpleDoubleProperty(20);
+    turnedOff = new SimpleBooleanProperty(true);
+    maxedOut = new SimpleBooleanProperty(false);
     heaterState = new SimpleStringProperty(model.getHeater().getState());
     warningProperty = new SimpleStringProperty();
     this.model.addListener(null, this);
   }
 
-  public void clear(){
+  public void clear()
+  {
     warningProperty.set("");
   }
 
-  private void checkCriticalTemperature(double t1)
+  private synchronized void checkCriticalTemperature(double t1, double t2)
   {
-    if (t1 > maxTemperature.get())
+    if ((t1 < maxTemperature.get() && t2 < maxTemperature.get()) ||
+        (t1 > minTemperature.get() && t2 > maxTemperature.get()))
+      clear();
+
+    if (t1 > maxTemperature.get() || t2 > maxTemperature.get())
     {
       warningProperty.set("Temperature too high!");
     }
-    else if (t1 < minTemperature.get())
+    else if (t1 < minTemperature.get() || t2 < minTemperature.get())
       warningProperty.set("Temperature too low!");
   }
 
@@ -58,18 +63,25 @@ public class MainWindowViewModel implements PropertyChangeListener
         Platform.runLater(() -> {
           Temperature temp = (Temperature) evt.getNewValue();
           temperatureInsideClosest.set(temp.getValue());
-          checkCriticalTemperature(temperatureInsideClosest.get());
+          checkCriticalTemperature(temperatureInsideClosest.get(),
+              temperatureInsideFurthest.get());
         });
         break;
       case "furthest":
         Platform.runLater(() -> {
           Temperature temp = (Temperature) evt.getNewValue();
           temperatureInsideFurthest.set(temp.getValue());
-          checkCriticalTemperature(temperatureInsideFurthest.get());
+          checkCriticalTemperature(temperatureInsideClosest.get(),
+              temperatureInsideFurthest.get());
         });
         break;
       case "state":
-        Platform.runLater(() -> heaterState.set((String) evt.getNewValue()));
+        Platform.runLater(() -> {
+          String state = (String)evt.getNewValue();
+          turnedOff.set("HeaterOff".equals(state));
+          maxedOut.set("HeaterHighPower".equals(state));
+          heaterState.set(state);
+        });
         break;
     }
   }
@@ -89,11 +101,13 @@ public class MainWindowViewModel implements PropertyChangeListener
     return temperatureOutside;
   }
 
-  public DoubleProperty getMinTemperature(){
+  public DoubleProperty getMinTemperature()
+  {
     return minTemperature;
   }
 
-  public DoubleProperty getMaxTemperature(){
+  public DoubleProperty getMaxTemperature()
+  {
     return maxTemperature;
   }
 
@@ -107,11 +121,21 @@ public class MainWindowViewModel implements PropertyChangeListener
     return warningProperty;
   }
 
-  public void powerUp(){
+  public BooleanProperty getTurnedOff(){
+    return turnedOff;
+  }
+
+  public BooleanProperty getMaxedOut(){
+    return maxedOut;
+  }
+
+  public void powerUp()
+  {
     model.powerUp();
   }
 
-  public void powerDown(){
+  public void powerDown()
+  {
     model.powerDown();
   }
 }

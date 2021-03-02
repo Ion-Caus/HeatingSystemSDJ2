@@ -3,6 +3,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import model.TemperatureModel;
 import model.TemperatureModelManager;
+import view.ViewHandler;
+import viewmodel.ViewModelFactory;
 
 public class MyApplication extends Application
 {
@@ -13,12 +15,11 @@ public class MyApplication extends Application
     TemperatureModel model = new TemperatureModelManager();
 
 
-//    //ViewModel
-//    var viewModelFactory = new ViewModelFactory(model);
+    //ViewModel
+    var viewModelFactory = new ViewModelFactory(model);
 
-    // View
-//    var view = new ViewHandler(viewModelFactory);
-//    view.start(primaryStage);
+    var view = new ViewHandler(viewModelFactory);
+    view.start(primaryStage);
 
 
     // Thermometer

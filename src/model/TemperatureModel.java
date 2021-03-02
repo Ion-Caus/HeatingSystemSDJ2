@@ -2,7 +2,10 @@ package model;
 
 import utility.observer.NamedPropertyChangeSubject;
 
-public interface TemperatureModel extends NamedPropertyChangeSubject
+import java.beans.PropertyChangeListener;
+
+public interface TemperatureModel extends NamedPropertyChangeSubject,
+    PropertyChangeListener
 {
   void addTemperature(String id,double externalTemperature, double temperature);
 

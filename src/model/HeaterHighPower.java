@@ -18,7 +18,8 @@ public class HeaterHighPower extends HeaterState
     wait = new Thread(()->{
       try
       {
-        Thread.sleep(40000);
+        Thread.sleep(4000);
+        System.out.println("powering down");
         heater.setState(new HeaterMidPower());
       }
       catch (InterruptedException e)
