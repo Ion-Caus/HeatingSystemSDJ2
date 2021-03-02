@@ -45,7 +45,6 @@ public class Thermometer implements Runnable, PropertyChangeListener
             heaterPowerState, distanceFromHeater, externalTemperature, seconds);
         System.out.printf(id + " %.1f\n", internalTemperameture);
         model.addTemperature(id, externalTemperature, internalTemperameture);
-        model.fireHeaterStateProperty(heaterPowerState);
       }
       catch (InterruptedException e)
       {
