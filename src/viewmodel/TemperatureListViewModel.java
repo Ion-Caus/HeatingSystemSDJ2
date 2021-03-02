@@ -25,16 +25,16 @@ public class TemperatureListViewModel implements PropertyChangeListener
   {
     switch (evt.getPropertyName())   // <--- thermometer id
     {
-      case "outside":
-        Platform.runLater(() -> outsideThermometerList.add(evt.getNewValue().toString()));
-        break;
-      case "closest":
-        Platform
-            .runLater(() -> insideHeaterThermometerList.add(evt.getNewValue().toString()));
-        break;
-      case "furthest":
-        Platform.runLater(() -> insideThermometerList.add(evt.getNewValue().toString()));
-        break;
+//      case "outside":
+//        Platform.runLater(() -> outsideThermometerList.add(evt.getNewValue().toString()));
+//        break;
+//      case "closest":
+//        Platform
+//            .runLater(() -> insideHeaterThermometerList.add(evt.getNewValue().toString()));
+//        break;
+//      case "furthest":
+//        Platform.runLater(() -> insideThermometerList.add(evt.getNewValue().toString()));
+//        break;
     }
 
   }

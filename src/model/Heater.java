@@ -21,28 +21,30 @@ public class Heater implements NamedPropertyChangeSubject
     this.heaterState.powerUp(this);
   }
 
-  public void powerDown(){
+  public void powerDown()
+  {
     this.heaterState.powerDown(this);
   }
 
-  public void setState(HeaterState state){
+  public void setState(HeaterState state)
+  {
     this.heaterState = state;
   }
 
-  public String getState(){
-    var stateName = heaterState.getClass().getSimpleName();
-    return stateName;
+  public String getState()
+  {
+    return heaterState.getClass().getSimpleName();
   }
 
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
-    property.addPropertyChangeListener(propertyName,listener);
+    property.addPropertyChangeListener(propertyName, listener);
   }
 
   @Override public void removeListener(String propertyName,
       PropertyChangeListener listener)
   {
-    property.removePropertyChangeListener(propertyName,listener);
+    property.removePropertyChangeListener(propertyName, listener);
   }
 }
