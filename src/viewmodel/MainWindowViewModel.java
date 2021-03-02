@@ -1,87 +1,117 @@
 package viewmodel;
+
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import model.Temperature;
 import model.TemperatureModel;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+public class MainWindowViewModel implements PropertyChangeListener
+{
+  private StringProperty heaterState, warningProperty;
+  private DoubleProperty temperatureInsideClosest, temperatureInsideFurthest, temperatureOutside, minTemperature, maxTemperature;
+  private TemperatureModel model;
 
-public class MainWindowViewModel implements PropertyChangeListener {
-    private StringProperty temperature, thermometerid;
-    private IntegerProperty heaterState;
-    private TemperatureModel model;
+  public MainWindowViewModel(TemperatureModel model)
+  {
+    this.model = model;
+    temperatureInsideClosest = new SimpleDoubleProperty(
+        model.getLastInsertedTemperature("closest").getValue());
+    temperatureInsideFurthest = new SimpleDoubleProperty(
+        model.getLastInsertedTemperature("furthest").getValue());
+    temperatureOutside = new SimpleDoubleProperty(
+        model.getLastInsertedTemperature("outside").getValue());
+    minTemperature = new SimpleDoubleProperty();
+    maxTemperature = new SimpleDoubleProperty();
+    heaterState = new SimpleStringProperty(model.getHeater().getState());
+    warningProperty = new SimpleStringProperty();
+    this.model.addListener(null, this);
+  }
 
-    public MainWindowViewModel(TemperatureModel model){
-        this.model = model;
-        temperature = new SimpleStringProperty();
-        thermometerid = new SimpleStringProperty();
-        heaterState= new SimpleIntegerProperty();
-        this.model.addListener(null,this);
+  public void clear(){
+    warningProperty.set("");
+  }
 
-    }
-
-
-
-    public void getValue(){
-        Temperature t = model.getLastInsertedTemperature(thermometerid.get());
-        if (t != null)
-        {
-            temperature.set(t.toString());
-        }
-        else
-        {
-            temperature.set("No data");
-        }
-    }
-
-    private void setValue(Temperature t){
-        temperature.set(t.toString());
-    }
-
-    public StringProperty getTemperature(){
-        return temperature;
-    }
-
-    public StringProperty getThermometerid(){
-        return thermometerid;
-    }
-
-
-    public IntegerProperty heaterStateProperty() {
-        return heaterState;
-    }
-
-    /*public void updateThermometerId(){
-        model.removeListener(thermometerid.get(),this);
-        String input = filtervalue.get();
-        if (input == null || input.isEmpty() || input.equalsIgnoreCase("All"))
-        {
-            input = "All";
-        }
-        thermometerid.set(input);
-        if (thermometerid.get() == null || thermometerid.get().equalsIgnoreCase("ALL"))
-        {
-            model.addListener(null,this);
-            filtervalue.set("All");
-        }
-        else
-        {
-            model.addListener(thermometerid.get(),this);
-            filtervalue.set(thermometerid.get());
-        }
-        filtervalue.set(null);
-        getValue();
-    }*/
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
+  private void checkCriticalTemperature(double t1)
+  {
+    if (t1 > maxTemperature.get())
     {
-        //Platform.runLater(()->temperature.set(evt.getNewValue().toString()));
+      warningProperty.set("Temperature too high!");
     }
+    else if (t1 < minTemperature.get())
+      warningProperty.set("Temperature too low!");
+  }
 
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    switch (evt.getPropertyName())
+    {
+      case "outside":
+        Platform.runLater(() -> {
+          Temperature temp = (Temperature) evt.getNewValue();
+          temperatureOutside.set(temp.getValue());
+        });
+        break;
+      case "closest":
+        Platform.runLater(() -> {
+          Temperature temp = (Temperature) evt.getNewValue();
+          temperatureInsideClosest.set(temp.getValue());
+          checkCriticalTemperature(temperatureInsideClosest.get());
+        });
+        break;
+      case "furthest":
+        Platform.runLater(() -> {
+          Temperature temp = (Temperature) evt.getNewValue();
+          temperatureInsideFurthest.set(temp.getValue());
+          checkCriticalTemperature(temperatureInsideFurthest.get());
+        });
+        break;
+      case "state":
+        Platform.runLater(() -> heaterState.set((String) evt.getNewValue()));
+        break;
+    }
+  }
 
+  public DoubleProperty getTemperatureInsideClosestProperty()
+  {
+    return temperatureInsideClosest;
+  }
+
+  public DoubleProperty getTemperatureInsideFurthestProperty()
+  {
+    return temperatureInsideFurthest;
+  }
+
+  public DoubleProperty getTemperatureOutsideProperty()
+  {
+    return temperatureOutside;
+  }
+
+  public DoubleProperty getMinTemperature(){
+    return minTemperature;
+  }
+
+  public DoubleProperty getMaxTemperature(){
+    return maxTemperature;
+  }
+
+  public StringProperty getHeaterStateProperty()
+  {
+    return heaterState;
+  }
+
+  public StringProperty getWarningProperty()
+  {
+    return warningProperty;
+  }
+
+  public void powerUp(){
+    model.powerUp();
+  }
+
+  public void powerDown(){
+    model.powerDown();
+  }
 }

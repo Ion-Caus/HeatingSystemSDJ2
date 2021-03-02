@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="447.0" prefWidth="734.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="447.0" prefWidth="734.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <children>
       <Label alignment="CENTER" prefHeight="57.0" prefWidth="734.0" text="Heater">
          <font>
@@ -25,7 +24,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefWidth="100.0" style="-fx-background-radius: 25;">
+                  <TextField fx:id="closestField" prefWidth="100.0" style="-fx-background-radius: 25;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -39,7 +38,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefWidth="100.0" style="-fx-background-radius: 25;">
+                  <TextField fx:id="furthestField" prefWidth="100.0" style="-fx-background-radius: 25;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -53,7 +52,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefWidth="100.0" style="-fx-background-radius: 25;">
+                  <TextField fx:id="outDoorField" prefWidth="100.0" style="-fx-background-radius: 25;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -71,7 +70,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField style="-fx-background-radius: 25;">
+                  <TextField fx:id="minTempField" style="-fx-background-radius: 25;">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -85,7 +84,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField style="-fx-background-radius: 25;">
+                  <TextField fx:id="maxTempField" style="-fx-background-radius: 25;">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -101,7 +100,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label text="Label">
+            <Label fx:id="heaterPowerStateLabel" text="Label">
                <HBox.margin>
                   <Insets right="90.0" />
                </HBox.margin>
@@ -109,19 +108,19 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-radius: 25;" text="Turn Up">
+            <Button mnemonicParsing="false" onAction="#powerUpPressed" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 25;" text="Power Up">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button layoutX="270.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-radius: 25;" text="Turn Down">
+            <Button layoutX="270.0" layoutY="10.0" mnemonicParsing="false" onAction="#powerDownPressed" prefHeight="38.0" prefWidth="120.0" style="-fx-background-radius: 25;" text="Power Down">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" style="-fx-background-radius: 25;" text="Details">
+      <Button mnemonicParsing="false" onAction="#detailsPressed" style="-fx-background-radius: 25;" text="Details">
          <VBox.margin>
             <Insets left="500.0" />
          </VBox.margin>
@@ -129,7 +128,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Label text="Error" textFill="#ed0303">
+      <Label fx:id="errorLabel" text="Error" textFill="#ed0303">
          <font>
             <Font size="18.0" />
          </font>

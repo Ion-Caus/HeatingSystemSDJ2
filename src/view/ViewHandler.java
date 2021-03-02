@@ -11,7 +11,7 @@ public class ViewHandler
   private Scene currentScene;
   private Stage primaryStage;
   private ViewModelFactory viewModelFactory;
-  private ControllerMainWindow controllerMainWindow;
+  private MainWindowController controllerMainWindow;
   private ControllerTemperatureList controllerTemperatureList;
 
   public ViewHandler(ViewModelFactory viewModelFactory)
@@ -34,7 +34,7 @@ public class ViewHandler
       case "main":
         root = loadMainWindowView("MainWindow.fxml");
         break;
-      case "list":
+      case "details":
         root = loadTempListStatsView("TemperatureListStatsView.fxml");
         break;
     }
