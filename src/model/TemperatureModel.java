@@ -11,4 +11,10 @@ public interface TemperatureModel extends NamedPropertyChangeSubject
   Temperature getLastInsertedTemperature();
 
   Temperature getLastInsertedTemperature(String id);
+
+  void powerUp();
+
+  void powerDown();
+
+  Heater getHeater();
 }

@@ -1,4 +1,4 @@
-package external;
+package model;
 
 public class HeaterMidPower extends HeaterState
 {

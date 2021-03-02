@@ -1,4 +1,4 @@
-package external;
+package model;
 
 import utility.observer.NamedPropertyChangeSubject;
 
@@ -27,9 +27,11 @@ public class Heater implements NamedPropertyChangeSubject
 
   public void setState(HeaterState state){
     this.heaterState = state;
-    var stateName = state.getClass().getSimpleName();
-    System.out.println(stateName);
-    property.firePropertyChange("state",null,stateName);
+  }
+
+  public String getState(){
+    var stateName = heaterState.getClass().getSimpleName();
+    return stateName;
   }
 
   @Override public void addListener(String propertyName,

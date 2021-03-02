@@ -1,5 +1,6 @@
 package external;
 
+import model.Heater;
 import model.TemperatureModel;
 
 import java.beans.PropertyChangeEvent;
@@ -17,8 +18,8 @@ public class Thermometer implements Runnable, PropertyChangeListener
   private TemperatureModel model;
   private Heater heater;
 
-
-  public Thermometer(String id, double internalTemperameture, int distanceFromHeater, TemperatureModel model, Heater heater)
+  public Thermometer(String id, double internalTemperameture,
+      int distanceFromHeater, TemperatureModel model)
   {
     this.id = id;
     this.internalTemperameture = internalTemperameture;
@@ -26,8 +27,7 @@ public class Thermometer implements Runnable, PropertyChangeListener
     this.heaterPowerState = 0;     // heaters power {0, 1, 2 or 3}
     this.externalTemperature = 0.0;  // starting outdoor temperature
     this.model = model;
-    this.heater = heater;
-    heater.addListener("state",this);
+    model.addListener("state",this);
   }
 
   @Override public void run()
@@ -40,10 +40,11 @@ public class Thermometer implements Runnable, PropertyChangeListener
       {
         int seconds = (int) (Math.random() * 4 + 4);
         Thread.sleep(seconds * 1000);
-        externalTemperature = externalTemperature(externalTemperature,-20,20);
-        internalTemperameture = temperature(internalTemperameture, heaterPowerState, distanceFromHeater, externalTemperature, seconds);
+//        externalTemperature = externalTemperature(externalTemperature, -20, 20);
+        internalTemperameture = temperature(internalTemperameture,
+            heaterPowerState, distanceFromHeater, externalTemperature, seconds);
         System.out.printf(id + " %.1f\n", internalTemperameture);
-        model.addTemperature(id,externalTemperature,internalTemperameture);
+        model.addTemperature(id, externalTemperature, internalTemperameture);
         model.fireHeaterStateProperty(heaterPowerState);
       }
       catch (InterruptedException e)
@@ -70,28 +71,35 @@ public class Thermometer implements Runnable, PropertyChangeListener
    * and when s, the number of seconds between each measurements are
    * between 4 and 8 seconds.
    *
-   * @param internalTemperameture  the last measured temperature
-   * @param heaterPowerState  the heaters power {0, 1, 2 or 3} where 0 is turned off,
-   *           1 is low, 2 is medium and 3 is high
-   * @param distanceFromHeater  the distance between heater and measurements {1 or 7}
-   *           where 1 is close to the heater and 7 is in the opposite corner
-   * @param externalTemperature the outdoor temperature (valid in the range [-20; 20])
-   * @param s  the number of seconds since last measurement [4; 8]
+   * @param internalTemperameture the last measured temperature
+   * @param heaterPowerState      the heaters power {0, 1, 2 or 3} where 0 is turned off,
+   *                              1 is low, 2 is medium and 3 is high
+   * @param distanceFromHeater    the distance between heater and measurements {1 or 7}
+   *                              where 1 is close to the heater and 7 is in the opposite corner
+   * @param externalTemperature   the outdoor temperature (valid in the range [-20; 20])
+   * @param s                     the number of seconds since last measurement [4; 8]
    * @return the temperature
    */
 
-  private double temperature(double internalTemperameture, int heaterPowerState, int distanceFromHeater, double externalTemperature, int s)
+  private double temperature(double internalTemperameture, int heaterPowerState,
+      int distanceFromHeater, double externalTemperature, int s)
   {
-    double tMax = Math.min(11 * heaterPowerState + 10, 11 * heaterPowerState + 10 + externalTemperature);
+    double tMax = Math.min(11 * heaterPowerState + 10,
+        11 * heaterPowerState + 10 + externalTemperature);
     tMax = Math.max(Math.max(internalTemperameture, tMax), externalTemperature);
     double heaterTerm = 0;
     if (heaterPowerState > 0)
     {
-      double den = Math.max((tMax * (20 - 5 * heaterPowerState) * (distanceFromHeater + 5)), 0.1);
+      double den = Math
+          .max((tMax * (20 - 5 * heaterPowerState) * (distanceFromHeater + 5)),
+              0.1);
       heaterTerm = 30 * s * Math.abs(tMax - internalTemperameture) / den;
     }
-    double outdoorTerm = (internalTemperameture - externalTemperature) * s / 250.0;
-    internalTemperameture = Math.min(Math.max(internalTemperameture - outdoorTerm + heaterTerm, externalTemperature), tMax);
+    double outdoorTerm =
+        (internalTemperameture - externalTemperature) * s / 250.0;
+    internalTemperameture = Math.min(
+        Math.max(internalTemperameture - outdoorTerm + heaterTerm,
+            externalTemperature), tMax);
     return internalTemperameture;
   }
 
@@ -99,25 +107,28 @@ public class Thermometer implements Runnable, PropertyChangeListener
    * Calculating the external temperature.
    * Values are only valid if the temperature is being measured
    * approximately every 10th second.
-   * @param externalTemperature  the last measured external temperature
-   * @param min a lower limit (may temporally be deceeded)
-   * @param max an upper limit (may temporally be exceeded)
+   *
+   * @param externalTemperature the last measured external temperature
+   * @param min                 a lower limit (may temporally be deceeded)
+   * @param max                 an upper limit (may temporally be exceeded)
    * @return an updated external temperature
    */
 
-  public double externalTemperature(double externalTemperature, double min, double max)
+  public double externalTemperature(double externalTemperature, double min,
+      double max)
   {
     double left = externalTemperature - min;
     double right = max - externalTemperature;
     int sign = Math.random() * (left + right) > left ? 1 : -1;
     externalTemperature += sign * Math.random();
-    System.out.printf("External temperature: %s \n",externalTemperature);
+    System.out.printf("External temperature: %s \n", externalTemperature);
     return externalTemperature;
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    switch ((String)evt.getNewValue()){
+    switch ((String) evt.getNewValue())
+    {
       case "HeaterOff":
         this.heaterPowerState = 0;
         break;

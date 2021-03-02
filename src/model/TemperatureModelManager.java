@@ -7,11 +7,13 @@ public class TemperatureModelManager implements TemperatureModel
 {
   private TemperatureList temperatureList;
   private PropertyChangeSupport property;
+  private Heater heater;
 
   public TemperatureModelManager()
   {
     temperatureList = new TemperatureList();
     this.property = new PropertyChangeSupport(this);
+    this.heater = new Heater();
   }
 
   @Override public synchronized void addTemperature(String id,double externalTemperature, double internalTemperature)
@@ -21,7 +23,6 @@ public class TemperatureModelManager implements TemperatureModel
     this.temperatureList.addTemperature(inside);
     property.firePropertyChange("outside",null,outside);
     property.firePropertyChange(id,null,inside);
-
 
   }
 
@@ -41,6 +42,23 @@ public class TemperatureModelManager implements TemperatureModel
     return temperatureList.getLastTemperature(id);
   }
 
+  @Override public void powerUp()
+  {
+    heater.powerUp();
+    property.firePropertyChange("state",null,heater.getState());
+  }
+
+  @Override public void powerDown()
+  {
+    heater.powerDown();
+    property.firePropertyChange("state",null,heater.getState());
+  }
+
+  @Override public Heater getHeater()
+  {
+    return this.heater;
+  }
+
   @Override public void addListener(String propertyName,
       PropertyChangeListener listener)
   {
@@ -58,6 +76,8 @@ public class TemperatureModelManager implements TemperatureModel
       this.property.removePropertyChangeListener(listener);
     }else property.removePropertyChangeListener(propertyName,listener);
   }
+
+
 
   // and maybe other methods...
 }
