@@ -18,12 +18,10 @@ public class TemperatureModelManager implements TemperatureModel
     heater.addListener("state",this);
   }
 
-  @Override public synchronized void addTemperature(String id,double externalTemperature, double internalTemperature)
+  @Override public synchronized void addTemperature(String id, double internalTemperature)
   {
     var inside = new Temperature(id, internalTemperature);
-    var outside = new Temperature("outside",externalTemperature);
     this.temperatureList.addTemperature(inside);
-    property.firePropertyChange("outside",null,outside);
     property.firePropertyChange(id,null,inside);
 
   }

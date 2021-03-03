@@ -6,7 +6,7 @@ public class DoubleStringConverter extends StringConverter<Number>
 {
   @Override public String toString(Number number)
   {
-    return number == null || number.doubleValue() == 0 ? "" : String.format("%.1f",number);
+    return number == null ? "" : String.format("%.1f",number);
   }
 
   @Override public Number fromString(String s)

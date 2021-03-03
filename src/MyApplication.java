@@ -8,7 +8,7 @@ import viewmodel.ViewModelFactory;
 
 public class MyApplication extends Application
 {
-  private Thermometer thermometer1, thermometer2;
+  private Thermometer thermometer1, thermometer2, thermometer3;
   public void start(Stage primaryStage)
   {
     // Model
@@ -23,13 +23,17 @@ public class MyApplication extends Application
 
 
     // Thermometer
-    thermometer1 = new Thermometer("closest", 15, 1,model);
+    thermometer1 = new Thermometer("closest", 15, 1,false,model);
     Thread t1 = new Thread(thermometer1);
     t1.start();
 
-    thermometer2 = new Thermometer("furthest", 15, 7,model);
+    thermometer2 = new Thermometer("furthest", 15, 7,false,model);
     Thread t2 = new Thread(thermometer2);
     t2.start();
+
+    thermometer3 = new Thermometer("outside",15,7,true,model);
+    var t3 = new Thread(thermometer3);
+    t3.start();
 
   }
   @Override

@@ -17,17 +17,20 @@ public class Thermometer implements Runnable, PropertyChangeListener
   private Thread runningThread;
   private TemperatureModel model;
   private Heater heater;
+  private boolean isExternal;
 
   public Thermometer(String id, double internalTemperameture,
-      int distanceFromHeater, TemperatureModel model)
+      int distanceFromHeater,boolean isExternal, TemperatureModel model)
   {
     this.id = id;
     this.internalTemperameture = internalTemperameture;
     this.distanceFromHeater = distanceFromHeater;
+    this.isExternal = isExternal;
     this.heaterPowerState = 0;     // heaters power {0, 1, 2 or 3}
     this.externalTemperature = 0.0;  // starting outdoor temperature
     this.model = model;
     model.addListener("state",this);
+    model.addTemperature("outside",externalTemperature);
   }
 
   @Override public void run()
@@ -38,13 +41,17 @@ public class Thermometer implements Runnable, PropertyChangeListener
     {
       try
       {
-        int seconds = (int) (Math.random() * 4 + 4);
+        int seconds = (isExternal)? 10:(int)(Math.random() * 4 + 4);
         Thread.sleep(seconds * 1000);
-//        externalTemperature = externalTemperature(externalTemperature, -20, 20);
-        internalTemperameture = temperature(internalTemperameture,
-            heaterPowerState, distanceFromHeater, externalTemperature, seconds);
-        System.out.printf(id + " %.1f\n", internalTemperameture);
-        model.addTemperature(id, externalTemperature, internalTemperameture);
+        externalTemperature = model.getLastInsertedTemperature("outside").getValue();
+        if(isExternal){
+          externalTemperature = externalTemperature(externalTemperature, -20, 20);
+          model.addTemperature(id,externalTemperature);
+        }else{
+          internalTemperameture = temperature(internalTemperameture,
+              heaterPowerState, distanceFromHeater, externalTemperature, seconds);
+          model.addTemperature(id,internalTemperameture);
+        }
       }
       catch (InterruptedException e)
       {
