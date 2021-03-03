@@ -21,10 +21,9 @@ public class TemperatureModelManager implements TemperatureModel
 
   @Override public synchronized void addTemperature(String id, double internalTemperature)
   {
-    var inside = new Temperature(id, internalTemperature);
-    this.temperatureList.addTemperature(inside);
-    property.firePropertyChange(id,null,inside);
-
+    var temperature = new Temperature(id, internalTemperature);
+    this.temperatureList.addTemperature(temperature);
+    property.firePropertyChange(id,null,temperature);
   }
 
 
