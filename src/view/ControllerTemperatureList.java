@@ -1,17 +1,25 @@
 package view;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Region;
 import model.Temperature;
 import viewmodel.MainWindowViewModel;
 import viewmodel.TemperatureListViewModel;
+import viewmodel.TemperatureViewModel;
 
 import java.util.ArrayList;
 
 public class ControllerTemperatureList
 {
+  @FXML private TableView<TemperatureViewModel> temperatureTable;
+  @FXML private TableColumn<TemperatureViewModel, String> nameColumn;
+  @FXML private TableColumn<TemperatureViewModel, String> temperatureColumn;
+  @FXML private TableColumn<TemperatureViewModel, String> timeDateColumn;
 
-  // @FXML private ListView<String> temperatureList;
   private Region root;
   private ViewHandler viewHandler;
   private TemperatureListViewModel temperatureListViewModel;
@@ -23,7 +31,11 @@ public class ControllerTemperatureList
     this.temperatureListViewModel = temperatureListViewModel;
     this.root = root;
 
-    //this.temperatureList.setItems(temperatureListViewModel.getList());
+    nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+    temperatureColumn.setCellValueFactory(cellData -> cellData.getValue().getValueProperty());
+    //timeDateColumn.setCellValueFactory(cellData -> cellData.getValue().getTimeDateProperty());
+
+    //this.temperatureTable.setItems(temperatureListViewModel.);
 
   }
 
@@ -37,7 +49,7 @@ public class ControllerTemperatureList
     return root;
   }
 
-  public void onBack()
+  @FXML public void onBack()
   {
     this.viewHandler.openView("main");
   }

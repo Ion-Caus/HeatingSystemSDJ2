@@ -17,11 +17,11 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="353.0" prefWidth="600.0">
          <children>
-            <TableView prefHeight="354.0" prefWidth="476.0">
+            <TableView prefHeight="354.0" prefWidth="476.0" fx:id="temperatureTable">
               <columns>
-                <TableColumn prefWidth="156.79999387264252" text="Name" />
-                <TableColumn prefWidth="194.4000244140625" text="Temperature" />
-                  <TableColumn prefWidth="124.800048828125" text="Time/Date?" />
+                <TableColumn prefWidth="156.79999387264252" fx:id="nameColumn" text="Name" />
+                <TableColumn prefWidth="194.4000244140625" fx:id="temperatureColumn" text="Temperature" />
+                  <TableColumn prefWidth="124.800048828125" fx:id="timeDateColumn" text="Time/Date?" />
               </columns>
             </TableView>
          </children>
