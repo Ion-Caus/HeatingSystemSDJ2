@@ -95,12 +95,12 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
          <children>
-            <Label text="Power position">
+            <Label text="Power position:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="heaterPowerStateLabel" prefHeight="27.0" prefWidth="168.0" text="Label">
+            <Label fx:id="heaterPowerStateLabel" prefHeight="27.0" prefWidth="168.0" text="Label" translateX="-35.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -128,13 +128,16 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Label fx:id="errorLabel" text="Error" textFill="#ed0303">
+      <Label fx:id="errorLabel" prefHeight="66.0" prefWidth="435.0" text="Error" textFill="#ed0303">
          <font>
             <Font size="18.0" />
          </font>
          <VBox.margin>
             <Insets left="40.0" />
          </VBox.margin>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
       </Label>
    </children>
 </VBox>

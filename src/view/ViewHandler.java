@@ -12,7 +12,7 @@ public class ViewHandler
   private Stage primaryStage;
   private ViewModelFactory viewModelFactory;
   private MainWindowController controllerMainWindow;
-  private ControllerTemperatureList controllerTemperatureList;
+  private TemperatureListController controllerTemperatureList;
 
   public ViewHandler(ViewModelFactory viewModelFactory)
   {
@@ -40,6 +40,7 @@ public class ViewHandler
     }
     currentScene.setRoot(root);
     String title = "";
+    assert root != null;
     if (root.getUserData() != null)
     {
       title += root.getUserData();

@@ -16,7 +16,8 @@ public class TemperatureListViewModel implements PropertyChangeListener
   public TemperatureListViewModel(TemperatureModel model)
   {
     this.model = model;
-    this.model.addListener(null, this);
+    this.model.addListener("closest", this);
+    this.model.addListener("furthest", this);
 
     this.temperatureList = FXCollections.observableArrayList();
 
@@ -44,19 +45,6 @@ public class TemperatureListViewModel implements PropertyChangeListener
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    switch (evt.getPropertyName())   // <--- thermometer id
-    {
-//      case "outside":
-//        Platform.runLater(() -> outsideThermometerList.add(evt.getNewValue().toString()));
-//        break;
-//      case "closest":
-//        Platform
-//            .runLater(() -> insideHeaterThermometerList.add(evt.getNewValue().toString()));
-//        break;
-//      case "furthest":
-//        Platform.runLater(() -> insideThermometerList.add(evt.getNewValue().toString()));
-//        break;
-    }
-
+    addTemperature( (Temperature) evt.getNewValue());
   }
 }

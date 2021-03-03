@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="500.0" prefWidth="760.0" userData="Temperature Stats" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerTemperatureList">
+<VBox prefHeight="500.0" prefWidth="760.0" style="-fx-background-color: lemonchiffon;" userData="Temperature Stats" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TemperatureListController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="82.0" prefWidth="778.0" text="Temperature Stats">
          <font>
@@ -17,11 +17,11 @@
       </Label>
       <HBox alignment="CENTER" prefHeight="353.0" prefWidth="600.0">
          <children>
-            <TableView prefHeight="354.0" prefWidth="476.0" fx:id="temperatureTable">
+            <TableView fx:id="temperatureTable" prefHeight="354.0" prefWidth="476.0">
               <columns>
-                <TableColumn prefWidth="156.79999387264252" fx:id="nameColumn" text="Name" />
-                <TableColumn prefWidth="194.4000244140625" fx:id="temperatureColumn" text="Temperature" />
-                  <TableColumn prefWidth="124.800048828125" fx:id="timeDateColumn" text="Time/Date?" />
+                <TableColumn fx:id="nameColumn" prefWidth="179.0" text="Name" />
+                <TableColumn fx:id="temperatureColumn" prefWidth="152.5" text="Temperature" />
+                  <TableColumn fx:id="timeDateColumn" prefWidth="145.0" text="Time" />
               </columns>
             </TableView>
          </children>

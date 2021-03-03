@@ -13,7 +13,7 @@ import viewmodel.TemperatureViewModel;
 
 import java.util.ArrayList;
 
-public class ControllerTemperatureList
+public class TemperatureListController
 {
   @FXML private TableView<TemperatureViewModel> temperatureTable;
   @FXML private TableColumn<TemperatureViewModel, String> nameColumn;
@@ -22,26 +22,25 @@ public class ControllerTemperatureList
 
   private Region root;
   private ViewHandler viewHandler;
-  private TemperatureListViewModel temperatureListViewModel;
+  private TemperatureListViewModel viewModel;
 
   public void init(ViewHandler viewHandler,
-      TemperatureListViewModel temperatureListViewModel, Region root)
+      TemperatureListViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
-    this.temperatureListViewModel = temperatureListViewModel;
+    this.viewModel = viewModel;
     this.root = root;
 
     nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
     temperatureColumn.setCellValueFactory(cellData -> cellData.getValue().getValueProperty());
-    //timeDateColumn.setCellValueFactory(cellData -> cellData.getValue().getTimeDateProperty());
+    timeDateColumn.setCellValueFactory(cellData -> cellData.getValue().getTimeProperty());
 
-    //this.temperatureTable.setItems(temperatureListViewModel.);
+    this.temperatureTable.setItems(viewModel.getAll());
 
   }
 
   public void reset()
   {
-
   }
 
   public Region getRoot()
