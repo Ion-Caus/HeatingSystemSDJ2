@@ -30,7 +30,7 @@ public class Thermometer implements Runnable, PropertyChangeListener
     this.externalTemperature = 0.0;  // starting outdoor temperature
     this.model = model;
     model.addListener("state",this);
-    model.addTemperature("outside",externalTemperature);
+    model.addTemperature("outside",externalTemperature); //adding starting outdoor temperature into the model for other threads to work with
   }
 
   @Override public void run()
@@ -43,7 +43,7 @@ public class Thermometer implements Runnable, PropertyChangeListener
       {
         int seconds = (isExternal)? 10:(int)(Math.random() * 4 + 4);
         Thread.sleep(seconds * 1000);
-        externalTemperature = model.getLastInsertedTemperature("outside").getValue();
+        externalTemperature = model.getLastInsertedTemperature("outside").getValue(); //fetching latest external temperature for internal thermometers
         if(isExternal){
           externalTemperature = externalTemperature(externalTemperature, -20, 20);
           model.addTemperature(id,externalTemperature);

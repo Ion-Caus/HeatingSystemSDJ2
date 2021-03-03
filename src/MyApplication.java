@@ -24,11 +24,11 @@ public class MyApplication extends Application
 
     // Thermometer
     thermometer1 = new Thermometer("closest", 15, 1,false,model);
-    Thread t1 = new Thread(thermometer1);
+    var t1 = new Thread(thermometer1);
     t1.start();
 
     thermometer2 = new Thermometer("furthest", 15, 7,false,model);
-    Thread t2 = new Thread(thermometer2);
+    var t2 = new Thread(thermometer2);
     t2.start();
 
     thermometer3 = new Thermometer("outside",15,7,true,model);
@@ -40,5 +40,6 @@ public class MyApplication extends Application
   public void stop(){
     thermometer1.stop();
     thermometer2.stop();
+    thermometer3.stop();
   }
 }

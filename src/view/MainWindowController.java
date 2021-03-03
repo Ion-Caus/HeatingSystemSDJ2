@@ -36,10 +36,6 @@ public class MainWindowController
     furthestField.setEditable(false);
     outDoorField.setEditable(false);
 
-    //    closestField.textProperty().bind(Bindings.createStringBinding(() -> String
-    //        .valueOf(
-    //            mainWindowViewModel.getTemperatureInsideClosestProperty().get())));
-
     Bindings.bindBidirectional(closestField.textProperty(),
         mainWindowViewModel.getTemperatureInsideClosestProperty(),
         new DoubleStringConverter());
@@ -63,8 +59,6 @@ public class MainWindowController
 
     powerDownButton.disableProperty().bindBidirectional(mainWindowViewModel.getTurnedOff());
     powerUpButton.disableProperty().bindBidirectional(mainWindowViewModel.getMaxedOut());
-
-
 
     reset();
   }
