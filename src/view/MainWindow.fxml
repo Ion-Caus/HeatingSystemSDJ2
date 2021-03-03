@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="447.0" prefWidth="734.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+<VBox prefHeight="500.0" prefWidth="760.0" style="-fx-background-color: lemonchiffon;" userData="Heater/Temperature Monitor" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <children>
-      <Label alignment="CENTER" prefHeight="57.0" prefWidth="734.0" text="Heater">
+      <Label alignment="CENTER" prefHeight="58.0" prefWidth="763.0" text="Heater Monitor">
          <font>
             <Font size="26.0" />
          </font>

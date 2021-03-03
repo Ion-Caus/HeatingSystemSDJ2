@@ -2,8 +2,11 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.scene.layout.Region;
+import model.Temperature;
 import viewmodel.MainWindowViewModel;
 import viewmodel.TemperatureListViewModel;
+
+import java.util.ArrayList;
 
 public class ControllerTemperatureList
 {
@@ -22,7 +25,6 @@ public class ControllerTemperatureList
 
     //this.temperatureList.setItems(temperatureListViewModel.getList());
 
-    //bindings
   }
 
   public void reset()
@@ -35,7 +37,7 @@ public class ControllerTemperatureList
     return root;
   }
 
-  public void onBack(ActionEvent actionEvent)
+  public void onBack()
   {
     this.viewHandler.openView("main");
   }

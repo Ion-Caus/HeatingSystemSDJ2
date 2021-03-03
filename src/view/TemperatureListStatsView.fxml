@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="512.0" prefWidth="600.0" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerTemperatureList">
+<VBox prefHeight="500.0" prefWidth="760.0" userData="Temperature Stats" style="-fx-background-color: lemonchiffon;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerTemperatureList">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="86.0" prefWidth="600.0" text="Temperature Stats">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="82.0" prefWidth="778.0" text="Temperature Stats">
          <font>
             <Font size="24.0" />
          </font>
@@ -28,7 +28,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="77.0" prefWidth="600.0" spacing="120.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" style="-fx-background-radius: 25;" text="Back">
+            <Button mnemonicParsing="false" onAction="#onBack" prefHeight="39.0" prefWidth="90.0" style="-fx-background-radius: 25;" text="Back">
                <font>
                   <Font size="18.0" />
                </font>
