@@ -1,6 +1,5 @@
 package viewmodel;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Temperature;
@@ -11,14 +10,36 @@ import java.beans.PropertyChangeListener;
 
 public class TemperatureListViewModel implements PropertyChangeListener
 {
-  private TemperatureModel temperatureModel;
+  private TemperatureModel model;
   private ObservableList<TemperatureViewModel> temperatureList;
 
   public TemperatureListViewModel(TemperatureModel model)
   {
-    this.temperatureModel = model;
+    this.model = model;
+    this.model.addListener(null, this);
+
     this.temperatureList = FXCollections.observableArrayList();
-    this.temperatureModel.addListener(null, this);
+
+    loadFromModel();
+  }
+
+  private void loadFromModel()
+  {
+    temperatureList.clear();
+    for (Temperature temperature : model.getTemperatureList()) {
+      temperatureList.add(new TemperatureViewModel(temperature));
+    }
+  }
+
+  public ObservableList<TemperatureViewModel> getAll() {
+    return temperatureList;
+  }
+
+  public void addTemperature(Temperature temperature) {
+    if (temperatureList.size() >= 20) {
+      temperatureList.remove(temperatureList.size()-1);
+    }
+    temperatureList.add(0, new TemperatureViewModel(temperature));
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

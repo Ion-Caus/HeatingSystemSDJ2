@@ -11,6 +11,10 @@ public class TemperatureList
       this.list = new ArrayList<>();
    }
 
+   public ArrayList<Temperature> getTemperatureList() {
+      return new ArrayList<>(list);
+   }
+
    public void addTemperature(Temperature temperature)
    {
       list.add(temperature);

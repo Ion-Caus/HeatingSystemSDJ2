@@ -3,6 +3,7 @@ package model;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 public class TemperatureModelManager implements TemperatureModel
 {
@@ -51,6 +52,11 @@ public class TemperatureModelManager implements TemperatureModel
   @Override public Heater getHeater()
   {
     return this.heater;
+  }
+
+  @Override
+  public ArrayList<Temperature> getTemperatureList() {
+    return temperatureList.getTemperatureList();
   }
 
   @Override public void addListener(String propertyName,

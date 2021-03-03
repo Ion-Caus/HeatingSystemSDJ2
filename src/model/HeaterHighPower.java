@@ -15,14 +15,14 @@ public class HeaterHighPower extends HeaterState
   }
 
   @Override public synchronized void timeout(Heater heater){
-    wait = new Thread(()->{
+    wait = new Thread( () -> {
       try
       {
         Thread.sleep(40000);
         System.out.println("powering down");
         heater.setState(new HeaterMidPower());
       }
-      catch (InterruptedException e)
+      catch (InterruptedException ignored)
       {
       }
     });

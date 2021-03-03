@@ -3,6 +3,7 @@ package model;
 import utility.observer.NamedPropertyChangeSubject;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public interface TemperatureModel extends NamedPropertyChangeSubject,
     PropertyChangeListener
@@ -18,4 +19,6 @@ public interface TemperatureModel extends NamedPropertyChangeSubject,
   void powerDown();
 
   Heater getHeater();
+
+  ArrayList<Temperature> getTemperatureList();
 }
