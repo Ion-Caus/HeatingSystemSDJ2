@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 public class ControllerTemperatureList
 {
-
-  //@FXML private ListView<String> temperatureList;
   @FXML private TableView<TemperatureViewModel> temperatureTable;
   @FXML private TableColumn<TemperatureViewModel, String> nameColumn;
   @FXML private TableColumn<TemperatureViewModel, String> temperatureColumn;
@@ -33,7 +31,11 @@ public class ControllerTemperatureList
     this.temperatureListViewModel = temperatureListViewModel;
     this.root = root;
 
-    //this.temperatureList.setItems(temperatureListViewModel.getList());
+    nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+    temperatureColumn.setCellValueFactory(cellData -> cellData.getValue().getValueProperty());
+    //timeDateColumn.setCellValueFactory(cellData -> cellData.getValue().getTimeDateProperty());
+
+    //this.temperatureTable.setItems(temperatureListViewModel.);
 
   }
 
@@ -47,7 +49,7 @@ public class ControllerTemperatureList
     return root;
   }
 
-  public void onBack()
+  @FXML public void onBack()
   {
     this.viewHandler.openView("main");
   }
