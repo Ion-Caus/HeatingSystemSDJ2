@@ -73,10 +73,11 @@ public class TemperatureModelManager implements TemperatureModel
   @Override public void removeListener(String propertyName,
       PropertyChangeListener listener)
   {
-    if(propertyName==null)
+    if(propertyName == null)
     {
       this.property.removePropertyChangeListener(listener);
-    }else property.removePropertyChangeListener(propertyName,listener);
+    }
+    else property.removePropertyChangeListener(propertyName,listener);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

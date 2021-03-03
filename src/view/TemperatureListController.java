@@ -35,7 +35,7 @@ public class TemperatureListController
     temperatureColumn.setCellValueFactory(cellData -> cellData.getValue().getValueProperty());
     timeDateColumn.setCellValueFactory(cellData -> cellData.getValue().getTimeProperty());
 
-    this.temperatureTable.setItems(viewModel.getAll());
+    this.temperatureTable.setItems(this.viewModel.getAll());
 
   }
 
