@@ -36,6 +36,7 @@ public class MyApplication extends Application
     t3.start();
 
   }
+
   @Override
   public void stop(){
     thermometer1.stop();

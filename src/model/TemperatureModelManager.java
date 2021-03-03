@@ -21,10 +21,10 @@ public class TemperatureModelManager implements TemperatureModel
 
   @Override public synchronized void addTemperature(String id, double internalTemperature)
   {
-    var inside = new Temperature(id, internalTemperature);
+    Temperature inside = new Temperature(id, internalTemperature);
+
     this.temperatureList.addTemperature(inside);
     property.firePropertyChange(id,null,inside);
-
   }
 
 
@@ -33,8 +33,7 @@ public class TemperatureModelManager implements TemperatureModel
     return temperatureList.getLastTemperature(null);
   }
 
-  @Override public synchronized Temperature getLastInsertedTemperature(
-      String id)
+  @Override public synchronized Temperature getLastInsertedTemperature(String id)
   {
     return temperatureList.getLastTemperature(id);
   }
@@ -55,17 +54,20 @@ public class TemperatureModelManager implements TemperatureModel
   }
 
   @Override
-  public ArrayList<Temperature> getTemperatureList() {
+  public ArrayList<Temperature> getTemperatureList()
+  {
     return temperatureList.getTemperatureList();
   }
 
-  @Override public void addListener(String propertyName,
-      PropertyChangeListener listener)
-  {
-      if(propertyName==null)
-      {
-        this.property.addPropertyChangeListener(listener);
-      }else property.addPropertyChangeListener(propertyName,listener);
+  @Override public void addListener(String propertyName, PropertyChangeListener listener) {
+    if (propertyName == null)
+    {
+      this.property.addPropertyChangeListener(listener);
+    }
+    else
+    {
+      this.property.addPropertyChangeListener(propertyName, listener);
+    }
   }
 
   @Override public void removeListener(String propertyName,
@@ -81,6 +83,4 @@ public class TemperatureModelManager implements TemperatureModel
   {
     property.firePropertyChange("state",null,evt.getNewValue());
   }
-
-  // and maybe other methods...
 }

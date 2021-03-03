@@ -19,8 +19,7 @@ public class Thermometer implements Runnable, PropertyChangeListener
   private Heater heater;
   private boolean isExternal;
 
-  public Thermometer(String id, double internalTemperameture,
-      int distanceFromHeater,boolean isExternal, TemperatureModel model)
+  public Thermometer(String id, double internalTemperameture, int distanceFromHeater, boolean isExternal, TemperatureModel model)
   {
     this.id = id;
     this.internalTemperameture = internalTemperameture;
@@ -44,12 +43,15 @@ public class Thermometer implements Runnable, PropertyChangeListener
         int seconds = (isExternal)? 10:(int)(Math.random() * 4 + 4);
         Thread.sleep(seconds * 1000);
         externalTemperature = model.getLastInsertedTemperature("outside").getValue(); //fetching latest external temperature for internal thermometers
-        if(isExternal){
+
+        if(isExternal)
+        {
           externalTemperature = externalTemperature(externalTemperature, -20, 20);
           model.addTemperature(id,externalTemperature);
-        }else{
-          internalTemperameture = temperature(internalTemperameture,
-              heaterPowerState, distanceFromHeater, externalTemperature, seconds);
+        }
+        else
+        {
+          internalTemperameture = temperature(internalTemperameture,heaterPowerState, distanceFromHeater, externalTemperature, seconds);
           model.addTemperature(id,internalTemperameture);
         }
       }

@@ -37,8 +37,8 @@ public class MainWindowViewModel implements PropertyChangeListener
 
   private synchronized void checkCriticalTemperature(double t1, double t2)
   {
-    if ((t1 < maxTemperature.get() && t2 < maxTemperature.get()) ||
-        (t1 > minTemperature.get() && t2 > maxTemperature.get()))
+    if (t1 < maxTemperature.get() && t2 < maxTemperature.get() &&
+        t1 > minTemperature.get() && t2 > minTemperature.get())
       clear();
 
     if (t1 > maxTemperature.get() || t2 > maxTemperature.get())
