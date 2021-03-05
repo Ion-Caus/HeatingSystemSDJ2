@@ -1,6 +1,5 @@
 package external;
 
-import model.Heater;
 import model.TemperatureModel;
 
 import java.beans.PropertyChangeEvent;
@@ -16,7 +15,6 @@ public class Thermometer implements Runnable, PropertyChangeListener
   private boolean running;
   private Thread runningThread;
   private TemperatureModel model;
-  private Heater heater;
   private boolean isExternal;
 
   public Thermometer(String id, double internalTemperameture, int distanceFromHeater, boolean isExternal, TemperatureModel model)
